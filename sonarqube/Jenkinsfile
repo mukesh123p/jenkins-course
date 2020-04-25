@@ -1,14 +1,14 @@
 node(label: 'builder') {
-    def myGradleContainer = docker.image('gradle:jdk8-alpine')
-    myGradleContainer.pull()
 
     stage('prep') {
-        git url: 'https://github.com/mukesh123p/gs-gradle.git'
+       git 'https://github.com/mukesh123p/jenkins-demo.git'
     }
 
     stage('build') {
-      myGradleContainer.inside("-v ${env.HOME}/.gradle:/home/gradle/.gradle --privileged") {
-        sh 'cd complete && /opt/gradle/bin/gradle build'
+     def myTestContainer = docker.image('node:4.6')
+		myTestContainer.pull()
+		myTestContainer.inside {
+	    	sh 'npm install'
       }
     }
 
