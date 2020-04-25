@@ -1,4 +1,4 @@
-node() {
+node {
 
     stage('prep') {
        git 'https://github.com/mukesh123p/jenkins-demo.git'
